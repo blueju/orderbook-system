@@ -1,5 +1,6 @@
 <%@ page language = "java" import = "java.sql.*" pageEncoding = "UTF-8" %>
 
+<%--负责 获取页面传来的值 和 预处理操作--%>
 <%
 	//	设置 字符集
 	request.setCharacterEncoding("utf-8");
@@ -9,109 +10,92 @@
 	String studentPassword = request.getParameter("password");
 	//	缓存超时时间
 	session.setMaxInactiveInterval(1440);
-	//
+	//  预定义
+	//  布尔值 是否存在
 	boolean isExist = false;
+	//  字符串 SQL语句 入参 实参
+	String sql;
+	//  结果集 用于装javabean传出的结果集
+	ResultSet rs = null;
+	//  int整型 是否可修改，0→不可编辑，1→可编辑
+	int canAlter = 0;
+	//  字符串  截止日期
+	String deadline = null;
 %>
 
-<%--数据库配置--%>
-<%@include file = "../common/databaseConfig.jsp" %>
-
-<%--日志--%>
-<%
-	//	猜测 日志
-	//String currenttime = formatDate.format(currentTime).toString();
-%>
+<%--引入Javabean--%>
+<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
 
 <%--登录验证--%>
 <%
 	try {
-		//  建立连接
-		conn = DriverManager.getConnection(url, user, password);
-
-		//  SQL语句
-		sql = conn.prepareStatement("SELECT * FROM tb_user WHERE id=? and password=?");
-		sql.setString(1, studentId);
-		sql.setString(2, studentPassword);
-		//  查询 是否存在该学生，并返回 结果集
-		rs = sql.executeQuery();
-		//  判断，如果存在，标识符have为true
+		// 建立连接
+		db.createDataBaseConnection();
+		// 数据库操作
+		sql = "SELECT * FROM tb_user WHERE id =" + studentId + "and password =" + studentPassword;
+		rs = db.executeQuery(sql);
+		//  判断是否存在，如果存在标识符isExist为true
 		if (rs.next()) {
 			isExist = true;
 		}
+		//关闭连接
+		db.closeDataBaseConnection();
 
-		//  定义 是否可编辑
-		int canEdit = 0;
-		//  SQL语句
-		sql = conn.prepareStatement("SELECT * FROM tb_edistatus WHERE col_name = 'editStatus'");
-		//  查询 是否可编辑，并返回 结果集，0→不可编辑，1→可编辑
-		rs = sql.executeQuery();
-		//  判断，如果可以，
+
+		// 建立连接
+		db.createDataBaseConnection();
+		// 数据库操作
+		sql = "SELECT * FROM tb_edistatus WHERE col_name = 'editStatus'";
+		rs = db.executeQuery(sql);
+		//  判断是否可以编辑
 		if (rs.next()) {
-			canEdit = rs.getInt("status");
+			canAlter = rs.getInt("status");
+			deadline = rs.getString("col_info");
 		}
 
-		//  定义  修改截止日期
-		String alterDeadline = null;
-		//  SQL语句
-		sql = conn.prepareStatement("SELECT * FROM tb_edistatus WHERE col_name = 'editStatus'");
-		//  查询 修改截止日期
-		rs = sql.executeQuery();
-		//  判断，如果截止日期
-		while (rs.next()) {
-			alterDeadline = rs.getString("col_info");
-		}
-		//  获取 目前时间
+		//  获取 当前时间
 		java.text.SimpleDateFormat formatDate = new java.text.SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date currentTime = new java.util.Date();
+
 		//
-		long targetTime = formatDate.parse(alterDeadline).getTime();
-		//  如果
+		long targetTime = formatDate.parse(deadline).getTime();
+		//  如果 当前时间 > 目标时间，则仍可修改
 		if (currentTime.getTime() > targetTime) {
-			canEdit = 1;
+			canAlter = 1;
 		}
 
-		session.setAttribute("status", canEdit);
-		//  销毁 结果集
-		rs.close();
-		//  销毁 SQL语句
-		sql.close();
-		//  销毁 数据库连接
-		conn.close();
+		//加入session
+		session.setAttribute("status", canAlter);
 
 	} catch (Exception ex) {
-		ex.printStackTrace();
+		System.out.print("登录验证出错");
+		response.sendRedirect("../pages/login.html");
+		return;
 	}
 %>
 
 <%--检查 权限--%>
 <%
 	try {
-		//  建立 连接
-		conn = DriverManager.getConnection(url, user, password);
-
-		//  SQL语句
-		sql = conn.prepareStatement("SELECT permission FROM tb_user WHERE id=?");
-		sql.setString(1, studentId);
-		//  查询 权限，并返回结果集
-		rs = sql.executeQuery();
-		//  判断，如果权限存在，将值赋予info
+		//建立连接
+		db.createDataBaseConnection();
+		//数据库操作
+		sql="SELECT permission FROM tb_user WHERE id=" + studentId;
+		rs = db.executeQuery(sql);
+		//  判断是否拥有权限
 		while (rs.next()) {
 			String info = rs.getString("permission");
 			session.setAttribute("userInfo", info);
 		}
+		//关闭数据库连接
+		db.closeDataBaseConnection();
 
-		//  销毁 结果集
-		rs.close();
-		//  销毁 SQL语句
-		sql.close();
-		//  销毁 数据库连接
-		conn.close();
 	} catch (Exception ex) {
-		ex.printStackTrace();
+		System.out.print("登录验证出错");
+		response.sendRedirect("../pages/login.html");
+		return;
 	}
-%>
-<%
-	out.println(isExist);
+
 	if (isExist) {
 //		session.setAttribute("actualuser", studentName);
 		session.setAttribute("actualsno", studentId);
@@ -121,11 +105,11 @@
 //		response.sendRedirect("../pages/home.jsp");
 //		return;
 		out.println("<script>alert('登录成功！')</script>");
-		response.setHeader("Refresh","1;url=../pages/home.jsp");
+		response.setHeader("Refresh", "1;url=../pages/home.jsp");
 	} else {
 		//前往 登录页
 		out.println("<script>alert('学号或密码错误，请重新登录！')</script>");
-		response.setHeader("Refresh","1;url=../pages/login.html");
+		response.setHeader("Refresh", "1;url=../pages/login.html");
 	}
 %>
 
