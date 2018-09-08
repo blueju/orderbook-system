@@ -34,17 +34,12 @@
 	<%--外部CSS--%>
 	<link rel = "stylesheet" href = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.css" >
 	<%--自定义CSS--%>
-	<style >
-		/*订单详情表格*/
-		.orderDetailTable{
-			margin-top: 50px;
-		}
-	</style >
+	<link rel = "stylesheet" href = "../assets/css/home.css" >
 
 </head >
 
 <body >
-<%--引入 头部导航栏 --%>
+<%--引入网站页头 --%>
 <%@ include file = "../common/header.jsp" %>
 
 <div class = "container-fluid orderDetailTable" >
@@ -86,5 +81,18 @@
 
 </div >
 
+<%--引入 网站页脚--%>
+<%@ include file = "../common/footer.jsp" %>
 
+<!--JavaScript-->
+<!--外部 JavaScript-->
+<script src = "https://lib.baomitu.com/jquery/3.3.1/jquery.js" ></script >
+<script src = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.js" ></script >
+<script src = "../static/js/jquery-validate/jquery.validate.js" ></script >
+<script src = "../static/js/jquery-validate/messages_zh.js"
+        type = "text/javascript" charset = "utf-8" ></script >
+<!--自定义 JavaScript-->
+<script src = "../assets/js/login_validate.js" type = "text/javascript" charset = "utf-8" ></script >
+<script src = "../assets/js/login.js" type = "text/javascript" charset = "utf-8" ></script >
 </body >
+</html >

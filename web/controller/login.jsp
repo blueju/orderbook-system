@@ -16,11 +16,13 @@
 	//  字符串 SQL语句 入参 实参
 	String sql;
 	//  结果集 用于装javabean传出的结果集
-	ResultSet rs = null;
+	ResultSet rs;
 	//  int整型 是否可修改，0→不可编辑，1→可编辑
 	int canAlter = 0;
 	//  字符串  截止日期
 	String deadline = null;
+	//  姓名
+	String name;
 %>
 
 <%--引入Javabean--%>
@@ -31,15 +33,23 @@
 	try {
 		// 建立连接
 		db.createDataBaseConnection();
-		// 数据库操作
-		sql = "SELECT * FROM tb_user WHERE id =" + studentId + "and password =" + studentPassword;
+		// 数据库操作（验证学号、密码）
+		sql = "SELECT * FROM tb_user WHERE id = '" + studentId + "' and password = '" + studentPassword + "';";
 		rs = db.executeQuery(sql);
 		//  判断是否存在，如果存在标识符isExist为true
 		if (rs.next()) {
+			//标识符isExist为true
 			isExist = true;
+			//获取姓名
+			name = rs.getString("name");
+			//姓名加入session
+			session.setAttribute("studentName", name);
+			//学号加入session
+			session.setAttribute("studentId", studentId);
 		}
 		//关闭连接
 		db.closeDataBaseConnection();
+
 
 
 		// 建立连接
@@ -49,6 +59,7 @@
 		rs = db.executeQuery(sql);
 		//  判断是否可以编辑
 		if (rs.next()) {
+		    //获取 是否能够修改 标识符
 			canAlter = rs.getInt("status");
 			deadline = rs.getString("col_info");
 		}
@@ -92,24 +103,24 @@
 
 	} catch (Exception ex) {
 		System.out.print("登录验证出错");
+		System.out.print(ex);
 		response.sendRedirect("../pages/login.html");
 		return;
 	}
 
 	if (isExist) {
 //		session.setAttribute("actualuser", studentName);
-		session.setAttribute("actualsno", studentId);
+//		session.setAttribute("actualsno", studentId);
 //		application.setAttribute("ul", studentName);
 //		out.println("<script>alert('这里')</script>");
 //		前往 主页
 //		response.sendRedirect("../pages/home.jsp");
 //		return;
-		out.println("<script>alert('登录成功！')</script>");
-		response.setHeader("Refresh", "1;url=../pages/home.jsp");
+		response.setHeader("Refresh", "0;url=../pages/home.jsp");
 	} else {
 		//前往 登录页
 		out.println("<script>alert('学号或密码错误，请重新登录！')</script>");
-		response.setHeader("Refresh", "1;url=../pages/login.html");
+		response.setHeader("Refresh", "0;url=../pages/login.html");
 	}
 %>
 

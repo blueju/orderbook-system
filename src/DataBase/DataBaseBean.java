@@ -18,11 +18,11 @@ public class DataBaseBean {
     private String dbPassword = "root";
 
     //  定义 数据库连接
-    private Connection conn = null;
+    private Connection conn;
     //  定义 ？？（类似中转对象，其中可能包含了具体如何查询数据库信息）
-    private Statement stmt = null;
+    private Statement stmt;
     //  定义 返回集
-    private ResultSet rs = null;
+    private ResultSet rs;
 
     //	建立数据库连接
     public Connection createDataBaseConnection() {
@@ -54,9 +54,9 @@ public class DataBaseBean {
     public ResultSet executeQuery(String sql) {
         try {
             //  建立对象
-            Statement stmt = conn.createStatement();
+            stmt = conn.createStatement();
             //  将查询所得结果 赋予 结果集（两步操作合二为一）
-            ResultSet rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             System.out.print("数据库查询操作出错！");
         }
@@ -67,7 +67,7 @@ public class DataBaseBean {
     public int executeUpdate(String sql) {
         try {
             //  建立对象
-            Statement stmt = conn.createStatement();
+            stmt = conn.createStatement();
             //  将更新结果返回值int 赋予 isOK（两步操作合二为一）
             isOK = stmt.executeUpdate(sql);
         } catch (SQLException e) {
