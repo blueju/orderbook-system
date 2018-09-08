@@ -3,9 +3,6 @@
 <!--CSS-->
 <link rel = "stylesheet" href = "../assets/css/footer.css" >
 
-</head >
-<body >
-
 <!--footer-->
 <div class = "footer" >
 	<div class = "row" >
@@ -14,8 +11,3 @@
 		</div >
 	</div >
 </div >
-
-<!--JavaScript-->
-
-</body >
-</html >

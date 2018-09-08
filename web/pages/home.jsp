@@ -1,8 +1,8 @@
 <%@page import = "java.text.DecimalFormat" %>
-<%@ page language = "java" import = "java.util.*" pageEncoding = "UTF-8" %>
+<%@ page language = "java" import = "java.util.*" pageEncoding = "utf-8" %>
 <%@page import = "java.sql.Connection" %>
 <%@page import = "java.sql.*" %>
-<%@page import = "java.sql.DriverManager" %>
+<%@page import = "java.sql.DriverManager, javax.swing.*" %>
 
 <!DOCTYPE html>
 <html >
@@ -42,38 +42,44 @@
 <%--引入网站页头 --%>
 <%@ include file = "../common/header.jsp" %>
 
+<%--引入Javabean--%>
+<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
+
+<%--全局定义--%>
+<%
+	int columnCount = 0;
+	String columnName;
+%>
+
+<%--预处理--%>
+<%
+	db.createDataBaseConnection();
+	String sql = "SELECT * FROM tb_order";
+	ResultSet rs = db.executeQuery(sql);
+	if(rs==null){
+	    System.out.println("结果集为空！");
+	}
+	ResultSetMetaData data = rs.getMetaData();
+	columnCount = data.getColumnCount();
+%>
+
 <div class = "container-fluid orderDetailTable" >
 	<div class = "row" >
 		<table class = "table table-hover" >
 			<thead >
 			<tr >
-				<th >学号</th >
-				<th >姓名</th >
-				<th >计算机网络</th >
-				<th >ERP</th >
-				<th >决策支持系统</th >
-				<th >IT项目管理</th >
-				<th >数据库应用系统设计</th >
-				<th >总量</th >
-				<th >总价</th >
-				<th >是否支付</th >
+				<%
+					for(int i = 1;i <= columnCount;i++){
+						out.print("<th>"+data.getColumnName(i)+"</th>");
+					}
+				%>
 			</tr >
 			</thead >
 			<tbody >
 			<tr >
-				<td >Tanmay</td >
-				<td >Bangalore</td >
-				<td >560001</td >
-			</tr >
-			<tr >
-				<td >Sachin</td >
-				<td >Mumbai</td >
-				<td >400003</td >
-			</tr >
-			<tr >
-				<td >Uma</td >
-				<td >Pune</td >
-				<td >411027</td >
+				<td ><%=rs.getString("学号")%></td >
+				<td ><%=rs.getString("姓名")%></td >
+
 			</tr >
 			</tbody >
 		</table >
@@ -85,14 +91,15 @@
 <%@ include file = "../common/footer.jsp" %>
 
 <!--JavaScript-->
-<!--外部 JavaScript-->
-<script src = "https://lib.baomitu.com/jquery/3.3.1/jquery.js" ></script >
-<script src = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.js" ></script >
-<script src = "../static/js/jquery-validate/jquery.validate.js" ></script >
-<script src = "../static/js/jquery-validate/messages_zh.js"
-        type = "text/javascript" charset = "utf-8" ></script >
-<!--自定义 JavaScript-->
-<script src = "../assets/js/login_validate.js" type = "text/javascript" charset = "utf-8" ></script >
-<script src = "../assets/js/login.js" type = "text/javascript" charset = "utf-8" ></script >
+	<!--外部 JavaScript-->
+		<%--全局--%>
+		<script src = "https://lib.baomitu.com/jquery/3.3.1/jquery.js" ></script >
+		<script src = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.js" ></script >
+		<%--header.jsp--%>
+		<script src="../assets/js/header.js"></script>
+
+	<!--自定义 JavaScript-->
+
+
 </body >
 </html >

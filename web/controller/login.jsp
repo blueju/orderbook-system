@@ -22,14 +22,15 @@
 	//  字符串  截止日期
 	String deadline = null;
 	//  姓名
-	String name;
+	String name = null;
 %>
 
 <%--引入Javabean--%>
 <jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
 
-<%--登录验证--%>
+
 <%
+	//登录验证
 	try {
 		// 建立连接
 		db.createDataBaseConnection();
@@ -42,16 +43,18 @@
 			isExist = true;
 			//获取姓名
 			name = rs.getString("name");
-			//姓名加入session
-			session.setAttribute("studentName", name);
-			//学号加入session
-			session.setAttribute("studentId", studentId);
 		}
 		//关闭连接
 		db.closeDataBaseConnection();
+	}catch (Exception e){
+		System.out.print("登录验证时发生错误！");
+		response.sendRedirect("../pages/login.html");return;
+	}
+%>
 
-
-
+<%--<%
+	//检查目前是否可修改
+	try {
 		// 建立连接
 		db.createDataBaseConnection();
 		// 数据库操作
@@ -63,30 +66,26 @@
 			canAlter = rs.getInt("status");
 			deadline = rs.getString("col_info");
 		}
-
 		//  获取 当前时间
 		java.text.SimpleDateFormat formatDate = new java.text.SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date currentTime = new java.util.Date();
-
 		//
 		long targetTime = formatDate.parse(deadline).getTime();
 		//  如果 当前时间 > 目标时间，则仍可修改
 		if (currentTime.getTime() > targetTime) {
 			canAlter = 1;
 		}
-
 		//加入session
 		session.setAttribute("status", canAlter);
-
-	} catch (Exception ex) {
-		System.out.print("登录验证出错");
+	} catch (Exception e) {
+		System.out.print("检查目前是否可修改时发生错误！");
 		response.sendRedirect("../pages/login.html");
 		return;
 	}
-%>
+%>--%>
 
-<%--检查 权限--%>
-<%
+<%--<%
+	//检查权限
 	try {
 		//建立连接
 		db.createDataBaseConnection();
@@ -100,22 +99,20 @@
 		}
 		//关闭数据库连接
 		db.closeDataBaseConnection();
-
-	} catch (Exception ex) {
-		System.out.print("登录验证出错");
-		System.out.print(ex);
-		response.sendRedirect("../pages/login.html");
-		return;
+	} catch (Exception e) {
+		System.out.print("检查权限时发生错误！");
+		response.sendRedirect("../pages/login.html");return;
 	}
+%>--%>
 
+<%
+	//判断用户是否存在
 	if (isExist) {
-//		session.setAttribute("actualuser", studentName);
-//		session.setAttribute("actualsno", studentId);
-//		application.setAttribute("ul", studentName);
-//		out.println("<script>alert('这里')</script>");
-//		前往 主页
-//		response.sendRedirect("../pages/home.jsp");
-//		return;
+		//姓名加入session
+		session.setAttribute("studentName", name);
+		//学号加入session
+		session.setAttribute("studentId", studentId);
+		//前往主页
 		response.setHeader("Refresh", "0;url=../pages/home.jsp");
 	} else {
 		//前往 登录页
