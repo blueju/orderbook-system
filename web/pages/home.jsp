@@ -118,7 +118,9 @@
 					int bookNumberTotal = 0;
 					//定义 书本总价
 					float bookPriceTotal = 0;
-					//
+					//定义 支付状态
+					int payStatus;
+
 					int j = 0;
 					out.print("<tr>");
 					out.print("<td>" + rs.getString("学号") + "</td>");
@@ -156,12 +158,19 @@
 //						}
 					}
 					out.print("<td>" + bookNumberTotal + "</td>");
-					out.print("<td>" + bookPriceTotal + "</td>");
-					out.print("<td>未支付</td>");
+					//四舍五入 取整
+//					out.print("<td>" + (int) (bookPriceTotal + 0.5f) + "</td>");
+					//四舍五入 到小数点2位
+					out.print("<td>" + (float) (Math.round(bookPriceTotal * 100)) / 100 + "</td>");
+
+					payStatus = rs.getInt("支付状态");
+					if (payStatus == 1) {
+						out.print("<td class='success'>已支付</td>");
+					} else {
+						out.print("<td class='danger'>未支付</td>");
+					}
 				}
 			%>
-
-
 			</tbody >
 		</table >
 	</div >
