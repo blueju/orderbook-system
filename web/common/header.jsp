@@ -1,13 +1,13 @@
 <%@ page language = "java" import = "java.util.*" pageEncoding = "UTF-8" %>
 
-<%--<%
+<%--<%--%>
 
-	if (session.getAttribute("studentId") == null) {
-		out.println("<script>alert('登录已超时，请重新登录！');");
-		response.sendRedirect("../pages/login.html");
-		return;
-	}
-%>--%>
+	<%--if (session.getAttribute("studentId") == null) {--%>
+		<%--out.println("<script>alert('登录已超时，请重新登录！');");--%>
+		<%--response.sendRedirect("../pages/login.html");--%>
+		<%--return;--%>
+	<%--}--%>
+<%--%>--%>
 
 <%
 	Object studentName = session.getAttribute("studentName");

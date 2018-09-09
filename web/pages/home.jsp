@@ -73,6 +73,9 @@
 		howManyTypeBook = rs.getInt("count(*)");
 	}
 
+	//存入session 多少门课/多少门教材
+	session.setAttribute("howManyTypeBook", howManyTypeBook);
+
 	sql = "SELECT * FROM tb_book";
 	rs = db.executeQuery(sql);
 	data = rs.getMetaData();
@@ -120,20 +123,13 @@
 					float bookPriceTotal = 0;
 					//定义 支付状态
 					int payStatus;
-
 					int j = 0;
 					out.print("<tr>");
 					out.print("<td>" + rs.getString("学号") + "</td>");
 					out.print("<td>" + rs.getString("姓名") + "</td>");
 					//从第3列开始，到第10列
 					for (i = 3; i <= (columnCount - 3); i++, j++) {
-						System.out.print(i + "\n");
-//					    j=i;
-//					    System.out.print("\n"+(columnCount-3));
-//						for (int j = 0; j <= i; j++) {
-//							System.out.print("\n"+(howManyTypeBook-1));
 						switch (rs.getInt(i)) {
-//							System.out.print(rs.getInt(i) + "\n");
 							case 0:
 								out.print("<td></td>");
 								break;
@@ -155,7 +151,6 @@
 							default:
 								out.print("<td></td>");
 						}
-//						}
 					}
 					out.print("<td>" + bookNumberTotal + "</td>");
 					//四舍五入 取整
