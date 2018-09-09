@@ -1,7 +1,8 @@
-<%@page import = "java.text.DecimalFormat" %>
 <%@ page language = "java" import = "java.util.*" pageEncoding = "utf-8" %>
-<%@page import = "java.sql.Connection" %>
+<%@ page contentType = "text/html; charset=utf-8" %>
 <%@page import = "java.sql.*" %>
+<%@page import = "java.sql.Connection" %>
+<%@page import = "java.text.DecimalFormat" %>
 <%@page import = "java.sql.DriverManager, javax.swing.*" %>
 
 <!DOCTYPE html>
@@ -29,37 +30,72 @@
 	<meta name = "viewport"
 	      content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" >
 	<!--标题-->
-	<title >订书系统</title >
+	<title >订书系统→订单详情</title >
 	<!--CSS-->
 	<%--外部CSS--%>
 	<link rel = "stylesheet" href = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.css" >
 	<%--自定义CSS--%>
-	<link rel = "stylesheet" href = "../assets/css/home.css" >
+	<link rel = "stylesheet" href = "../assets/css/common.css" >
 
 </head >
 
 <body >
-<%--引入网站页头 --%>
-<%@ include file = "../common/header.jsp" %>
 
 <%--引入Javabean--%>
 <jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
 
+<%--引入网站页头 --%>
+<%@ include file = "../common/header.jsp" %>
+
 <%--全局定义--%>
 <%
 	int columnCount = 0;
+	String sql;
+	ResultSet rs;
 	String columnName;
+	int howManyTypeBook = 0;
+	float bookPrice[][];
+	ResultSetMetaData data;
+	//定义 每门教材有多少种选择（正版、二手、复印）
+	int eachTypeHowManyChoice;
 %>
 
 <%--预处理--%>
 <%
+	request.setCharacterEncoding("utf-8");
+
 	db.createDataBaseConnection();
-	String sql = "SELECT * FROM tb_order";
-	ResultSet rs = db.executeQuery(sql);
-	if(rs==null){
-	    System.out.println("结果集为空！");
+
+	sql = "SELECT count(*) FROM tb_book";
+	rs = db.executeQuery(sql);
+	if (rs.next()) {
+		//获取 总共有多少门教材 8
+		howManyTypeBook = rs.getInt("count(*)");
 	}
-	ResultSetMetaData data = rs.getMetaData();
+
+	sql = "SELECT * FROM tb_book";
+	rs = db.executeQuery(sql);
+	data = rs.getMetaData();
+	//获取 每门教材有几种选择（正版、二手、复印）（后面三列分别是正版，二手和复印的价格列 = 总共有多少列 - 前面无关紧要的3列）
+	eachTypeHowManyChoice = data.getColumnCount() - 3;
+
+	bookPrice = new float[howManyTypeBook][eachTypeHowManyChoice];
+
+	// →howManyTypeBook
+	int i = 0;
+	while (rs.next()) {
+		//→howManyTypeBook
+		int j;
+		for (j = 0; j <= eachTypeHowManyChoice - 1; j++) {
+			bookPrice[i][j] = rs.getFloat(j + 4);
+		}
+		i++;
+	}
+
+	sql = "SELECT * FROM tb_order";
+	rs = db.executeQuery(sql);
+	data = rs.getMetaData();
+	//获取 订单表共有多少列 13
 	columnCount = data.getColumnCount();
 %>
 
@@ -69,18 +105,63 @@
 			<thead >
 			<tr >
 				<%
-					for(int i = 1;i <= columnCount;i++){
-						out.print("<th>"+data.getColumnName(i)+"</th>");
+					for (i = 1; i <= columnCount; i++) {
+						out.print("<th>" + data.getColumnName(i) + "</th>");
 					}
 				%>
 			</tr >
 			</thead >
 			<tbody >
-			<tr >
-				<td ><%=rs.getString("学号")%></td >
-				<td ><%=rs.getString("姓名")%></td >
+			<%
+				while (rs.next()) {
+					//定义 书本总量
+					int bookNumberTotal = 0;
+					//定义 书本总价
+					float bookPriceTotal = 0;
+					//
+					int j = 0;
+					out.print("<tr>");
+					out.print("<td>" + rs.getString("学号") + "</td>");
+					out.print("<td>" + rs.getString("姓名") + "</td>");
+					//从第3列开始，到第10列
+					for (i = 3; i <= (columnCount - 3); i++, j++) {
+						System.out.print(i + "\n");
+//					    j=i;
+//					    System.out.print("\n"+(columnCount-3));
+//						for (int j = 0; j <= i; j++) {
+//							System.out.print("\n"+(howManyTypeBook-1));
+						switch (rs.getInt(i)) {
+//							System.out.print(rs.getInt(i) + "\n");
+							case 0:
+								out.print("<td></td>");
+								break;
+							case 1:
+								out.print("<td class='info'>正版书</td>");
+								bookNumberTotal++;
+								bookPriceTotal = bookPriceTotal + bookPrice[j][0];
+								break;
+							case 2:
+								out.print("<td class='info'>二手书</td>");
+								bookNumberTotal++;
+								bookPriceTotal = bookPriceTotal + bookPrice[j][1];
+								break;
+							case 3:
+								out.print("<td class='info'>复印书</td>");
+								bookNumberTotal++;
+								bookPriceTotal = bookPriceTotal + bookPrice[j][2];
+								break;
+							default:
+								out.print("<td></td>");
+						}
+//						}
+					}
+					out.print("<td>" + bookNumberTotal + "</td>");
+					out.print("<td>" + bookPriceTotal + "</td>");
+					out.print("<td>未支付</td>");
+				}
+			%>
 
-			</tr >
+
 			</tbody >
 		</table >
 	</div >
@@ -91,14 +172,14 @@
 <%@ include file = "../common/footer.jsp" %>
 
 <!--JavaScript-->
-	<!--外部 JavaScript-->
-		<%--全局--%>
-		<script src = "https://lib.baomitu.com/jquery/3.3.1/jquery.js" ></script >
-		<script src = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.js" ></script >
-		<%--header.jsp--%>
-		<script src="../assets/js/header.js"></script>
+<!--外部 JavaScript-->
+<%--全局--%>
+<script src = "https://lib.baomitu.com/jquery/3.3.1/jquery.js" ></script >
+<script src = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.js" ></script >
+<%--header.jsp--%>
 
-	<!--自定义 JavaScript-->
+
+<!--自定义 JavaScript-->
 
 
 </body >

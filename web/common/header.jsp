@@ -32,9 +32,10 @@
 		<%--导航栏--%>
 		<div class = "collapse navbar-collapse"  id="navbar-collapse">
 			<ul class = "nav navbar-nav" >
-				<li class = "active" ><a href = "#" >订书详情</a ></li >
-				<li ><a href = "#" >订书中心</a ></li >
-				<li ><a href = "#" >支付中心</a ></li >
+				<li ><a href = "../pages/home.jsp" >订书详情</a ></li >
+				<li ><a href = "../pages/order.jsp" >订书中心</a ></li >
+				<li ><a href = "../pages/pay.jsp" >支付中心</a ></li >
+				<li ><a href = "" data-toggle="modal" data-target="#myModal"><strong>通知</strong></a ></li >
 			</ul >
 			<div class="navbar-right">
 				<p class="navbar-text"><span class="glyphicon glyphicon-user"></span> <%=studentId%> <%=studentName%></p>
@@ -43,3 +44,7 @@
 		</div >
 	</div >
 </nav >
+
+
+<%--引入通知弹窗 --%>
+<%@ include file = "modal/notice.jsp" %>
