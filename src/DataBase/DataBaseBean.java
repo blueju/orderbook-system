@@ -23,6 +23,7 @@ public class DataBaseBean {
     private Statement stmt;
     //  定义 返回集
     private ResultSet rs;
+    private Array[] bookCode;
 
     //	建立数据库连接
     public Connection createDataBaseConnection() {
@@ -70,6 +71,39 @@ public class DataBaseBean {
             stmt = conn.createStatement();
             //  将更新结果返回值int 赋予 isOK（两步操作合二为一）
             isOK = stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.print("数据库更新操作出错！");
+        }
+        return isOK;
+    }
+
+    //  数据库批量更新操作（增加、删除、修改）
+    public int executeUpdateMany(String sql, String[] bookCode) {
+        try {
+            stmt = conn.prepareStatement(sql);
+            System.out.print(sql + "\n");
+            System.out.print(bookCode[0] + "\n");
+            ((PreparedStatement) stmt).setString(1, bookCode[0]);
+            ((PreparedStatement) stmt).setString(2, bookCode[1]);
+            ((PreparedStatement) stmt).setString(3, bookCode[2]);
+            ((PreparedStatement) stmt).setString(4, bookCode[3]);
+            ((PreparedStatement) stmt).setString(5, bookCode[4]);
+            ((PreparedStatement) stmt).setString(6, bookCode[5]);
+            ((PreparedStatement) stmt).setString(7, bookCode[6]);
+            ((PreparedStatement) stmt).setString(8, bookCode[7]);
+            System.out.print(sql + "\n");
+            isOK = ((PreparedStatement) stmt).executeUpdate();
+//            stmt = conn.createStatement();
+//            stmt.executeUpdate(sql);
+//            sql =sql;
+//            PreparedStatement sqlMany = new abstract
+//            sqlMany = sql;
+//            //  建立对象
+//            stmt = conn.createStatement();
+//            sql = conn.prepareStatement();
+//            sql.setString(1, bookCode[0]);
+            //  将更新结果返回值int 赋予 isOK（两步操作合二为一）
+//            isOK = sql.executeUpdate();
         } catch (SQLException e) {
             System.out.print("数据库更新操作出错！");
         }

@@ -44,10 +44,10 @@
 <div class = "container-fluid order" >
 	<div class = "col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" >
 		<h4 style = "text-align: center;font-weight: bold" >订书中心</h4 >
-		<form class = "form-horizontal" role = "form" >
+		<form class = "form-horizontal" role = "form" action = "../controller/order-alter-save.jsp" method = "post" >
 			<%--学号--%>
 			<div class = "form-group" >
-				<label for = "" class = "col-lg-6 col-md-6 col-sm-6 control-label course-name" >学号</label >
+				<label class = "col-lg-6 col-md-6 col-sm-6 control-label course-name" >学号</label >
 				<div class = "col-lg-6 col-md-6 col-sm-6" >
 					<p class = "form-control-static" ><%=studentId%>
 					</p >
@@ -55,7 +55,7 @@
 			</div >
 			<%--姓名--%>
 			<div class = "form-group" >
-				<label for = "" class = "col-lg-6 col-md-6 col-sm-6 control-label course-name" >姓名</label >
+				<label class = "col-lg-6 col-md-6 col-sm-6 control-label course-name" >姓名</label >
 				<div class = "col-lg-6 col-md-6 col-sm-6" >
 					<p class = "form-control-static" ><%=studentName%>
 					</p >
@@ -71,49 +71,72 @@
 				studentId = session.getAttribute("studentId");
 				studentName = session.getAttribute("studentName");
 				db.createDataBaseConnection();
-				sql = "SELECT * FROM tb_order WHERE 学号 = '" + studentId + "' AND 姓名 = '" + studentName + "';";
+				sql = "SELECT * FROM tb_order WHERE id = '" + studentId + "' AND name = '" + studentName + "';";
 				System.out.print(sql + "\n");
 				rs = db.executeQuery(sql);
 				data = rs.getMetaData();
 				columnCount = data.getColumnCount();
 				usableColumnCount = columnCount - 3;
-				//System.out.print("usableColumnCount:" + usableColumnCount);
 				if (rs.next()) {
 					for (int i = 3; i <= usableColumnCount; i++) {
 						out.print("<div class = \"form-group\" >");
 						out.print("<label class = \"col-lg-6 col-md-6 col-sm-6 control-label course-name\" >");
-						out.print(data.getColumnName(i));
-						//System.out.print("列名:" + data.getColumnName(i));
+						//out.print(data.getColumnName(i));
+						switch (i) {
+							case 3:
+								out.print("计算机网络");
+								break;
+							case 4:
+								out.print("ERP原理、实施与管理");
+								break;
+							case 5:
+								out.print("移动开发技术与应用");
+								break;
+							case 6:
+								out.print("决策支持系统");
+								break;
+							case 7:
+								out.print("IT项目管理");
+								break;
+							case 8:
+								out.print("信息安全");
+								break;
+							case 9:
+								out.print("数据库应用系统设计");
+								break;
+							case 10:
+								out.print("数据处理技术与SPSS");
+								break;
+						}
 						out.print("</label >");
-						//out.print("");
 						out.print("<div class = \"col-lg-6 col-md-6 col-sm-6\" >");
-						out.print("<select class = \"form-control\" >");
+						out.print("<select class = 'form-control' name = '" + data.getColumnName(i) + "' >");
 
 						System.out.print("书对应号:" + rs.getInt(i) + "\n");
 						switch (rs.getInt(i)) {
 							case 0:
-								out.print("<option selected>不订</option >");
-								out.print("<option >正版书</option >");
-								out.print("<option >二手书</option >");
-								out.print("<option >复印书</option >");
+								out.print("<option selected value='0'>不订</option >");
+								out.print("<option value='1'>正版书</option >");
+								out.print("<option value='2'>二手书</option >");
+								out.print("<option value='3'>复印书</option >");
 								break;
 							case 1:
-								out.print("<option >不订</option >");
-								out.print("<option selected>正版书</option >");
-								out.print("<option >二手书</option >");
-								out.print("<option >复印书</option >");
+								out.print("<option value='0'>不订</option >");
+								out.print("<option selected value='1'>正版书</option >");
+								out.print("<option value='2'>二手书</option >");
+								out.print("<option value='3'>复印书</option >");
 								break;
 							case 2:
-								out.print("<option >不订</option >");
-								out.print("<option >正版书</option >");
-								out.print("<option selected>二手书</option >");
-								out.print("<option >复印书</option >");
+								out.print("<option value='0'>不订</option >");
+								out.print("<option value='1'>正版书</option >");
+								out.print("<option selected value='2'>二手书</option >");
+								out.print("<option value='3'>复印书</option >");
 								break;
 							case 3:
-								out.print("<option >不订</option >");
-								out.print("<option >正版书</option >");
-								out.print("<option >二手书</option >");
-								out.print("<option selected>复印书</option >");
+								out.print("<option value='0'>不订</option >");
+								out.print("<option value='1'>正版书</option >");
+								out.print("<option value='2'>二手书</option >");
+								out.print("<option selected value='3'>复印书</option >");
 								break;
 						}
 						out.print("</select >");

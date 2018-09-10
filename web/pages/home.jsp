@@ -1,4 +1,4 @@
-<%@ page language = "java" import = "java.util.*" pageEncoding = "utf-8" %>
+<%@ page language = "java" import = "java.util.*,java.util.List, java.util.ArrayList" pageEncoding = "utf-8" %>
 <%@ page contentType = "text/html; charset=utf-8" %>
 <%@page import = "java.sql.*" %>
 <%@page import = "java.sql.Connection" %>
@@ -66,6 +66,7 @@
 
 	db.createDataBaseConnection();
 
+
 	sql = "SELECT count(*) FROM tb_book";
 	rs = db.executeQuery(sql);
 	if (rs.next()) {
@@ -102,16 +103,34 @@
 	columnCount = data.getColumnCount();
 %>
 
+<%--<%@include file = "../controller/comments.jsp" %>--%>
+
 <div class = "container-fluid orderDetailTable" >
 	<div class = "row" >
 		<table class = "table table-hover" >
 			<thead >
 			<tr >
-				<%
-					for (i = 1; i <= columnCount; i++) {
-						out.print("<th>" + data.getColumnName(i) + "</th>");
-					}
-				%>
+
+				<%--<%--%>
+					<%--int j = 0;--%>
+					<%--for (i = 1; i <= columnCount; i++, j++) {--%>
+						<%--out.print("<th>" + columnComments[j] + "</th>");--%>
+					<%--}--%>
+				<%--%>--%>
+
+				<th>学号</th>
+					<th>姓名</th>
+					<th>计算机网络</th>
+					<th>ERP原理、实施与管理</th>
+					<th>移动开发技术与应用</th>
+					<th>决策支持系统</th>
+					<th>IT项目管理</th>
+					<th>信息安全</th>
+					<th>数据库应用系统设计</th>
+					<th>数据处理技术与SPSS</th>
+					<th>总量</th>
+					<th>总价</th>
+					<th>支付状态</th>
 			</tr >
 			</thead >
 			<tbody >
@@ -125,8 +144,8 @@
 					int payStatus;
 					int j = 0;
 					out.print("<tr>");
-					out.print("<td>" + rs.getString("学号") + "</td>");
-					out.print("<td>" + rs.getString("姓名") + "</td>");
+					out.print("<td>" + rs.getString("id") + "</td>");
+					out.print("<td>" + rs.getString("name") + "</td>");
 					//从第3列开始，到第10列
 					for (i = 3; i <= (columnCount - 3); i++, j++) {
 						switch (rs.getInt(i)) {
@@ -158,7 +177,7 @@
 					//四舍五入 到小数点2位
 					out.print("<td>" + (float) (Math.round(bookPriceTotal * 100)) / 100 + "</td>");
 
-					payStatus = rs.getInt("支付状态");
+					payStatus = rs.getInt("paystatus");
 					if (payStatus == 1) {
 						out.print("<td class='success'>已支付</td>");
 					} else {
