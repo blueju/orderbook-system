@@ -1,0 +1,232 @@
+/*表格最小宽度*/
+
+table {
+    min-width: 400px;
+}
+
+.orderbook td{
+	height: 37px;
+}
+
+/*消除td标签下p标签的下边距*/
+
+.orderbook td>p {
+    margin-bottom: 0;
+}
+
+
+/*媒体查询*/
+
+@media (max-width: 883px) {
+    /*隐藏 表头*/
+    th {
+        display: none;
+    }
+    /*以 块状元素 显示*/
+    tr,
+    td {
+        display: block;
+    }
+    /*行*/
+    tr {
+        position: relative;
+        margin-bottom: 1em;
+        box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.2);
+    }
+	/*第一个	学号*/
+    .student_id {
+        text-align: center;
+        background-color: #3d82c2;
+        position: relative;
+    }
+    .student_id p {
+        padding-left: 20%;
+    }
+    .student_id::before {
+        content: "学号";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第二个	姓名*/
+    .name {
+        text-align: center;
+        position: relative;
+    }
+    .name p {
+        padding-left: 20%;
+    }
+    .name::before {
+        content: "姓名";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第三个*/
+    td:nth-child(3){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(3) p{
+        padding-left: 20%;
+    }
+    td:nth-child(3)::before {
+        content: "计算机网络";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第4个*/
+    td:nth-child(4){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(4) p{
+        padding-left: 20%;
+    }
+    td:nth-child(4)::before {
+        content: "ERP原理、实施与管理";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第5个*/
+    td:nth-child(5){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(5) p{
+        padding-left: 20%;
+    }
+    td:nth-child(5)::before {
+        content: "移动开发技术与应用";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第6个*/
+    td:nth-child(6){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(6) p{
+        padding-left: 20%;
+    }
+    td:nth-child(6)::before {
+        content: "决策支持系统";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第7个*/
+    td:nth-child(7){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(7) p{
+        padding-left: 20%;
+    }
+    td:nth-child(7)::before {
+        content: "IT项目管理";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第8个*/
+    td:nth-child(8){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(8) p{
+        padding-left: 20%;
+    }
+    td:nth-child(8)::before {
+        content: "信息安全";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第9个*/
+    td:nth-child(9){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(9) p{
+        padding-left: 20%;
+    }
+    td:nth-child(9)::before {
+        content: "数据库应用系统设计";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第10个*/
+    td:nth-child(10){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(10) p{
+        padding-left: 20%;
+    }
+    td:nth-child(10)::before {
+        content: "数据处理技术与SPSS";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第11个*/
+    td:nth-child(11){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(11) p{
+        padding-left: 20%;
+    }
+    td:nth-child(11)::before {
+        content: "总量";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第12个*/
+    td:nth-child(12){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(12) p{
+        padding-left: 20%;
+    }
+    td:nth-child(12)::before {
+        content: "总价";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+    /*第13个*/
+    td:nth-child(13){
+        text-align: center;
+        position: relative;
+    }
+    td:nth-child(13) p{
+        padding-left: 20%;
+    }
+    td:nth-child(13)::before {
+        content: "支付状态";
+        position: absolute;
+        left: 9.2px;
+        top: 9.2px;
+        font-weight: bold;
+    }
+}

@@ -36,6 +36,7 @@
 	<link rel = "stylesheet" href = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.css" >
 	<%--自定义CSS--%>
 	<link rel = "stylesheet" href = "../assets/css/common.css" >
+	<link rel = "stylesheet" href = "../assets/css/home.css" >
 
 </head >
 
@@ -107,7 +108,7 @@
 
 <div class = "container-fluid orderDetailTable" >
 	<div class = "row" >
-		<table class = "table table-hover" >
+		<table class = "table table-hover orderbook" >
 			<thead >
 			<tr >
 
@@ -118,7 +119,7 @@
 					<%--}--%>
 				<%--%>--%>
 
-				<th>学号</th>
+					<th>学号</th>
 					<th>姓名</th>
 					<th>计算机网络</th>
 					<th>ERP原理、实施与管理</th>
@@ -144,8 +145,8 @@
 					int payStatus;
 					int j = 0;
 					out.print("<tr>");
-					out.print("<td>" + rs.getString("id") + "</td>");
-					out.print("<td>" + rs.getString("name") + "</td>");
+					out.print("<td class=\"student_id\"><p>" + rs.getString("id") + "</p></td>");
+					out.print("<td class=\"name\"><p>" + rs.getString("name") + "</p></td>");
 					//从第3列开始，到第10列
 					for (i = 3; i <= (columnCount - 3); i++, j++) {
 						switch (rs.getInt(i)) {
@@ -153,17 +154,17 @@
 								out.print("<td></td>");
 								break;
 							case 1:
-								out.print("<td class='info'>正版书</td>");
+								out.print("<td class='info'><p>正版书</p></td>");
 								bookNumberTotal++;
 								bookPriceTotal = bookPriceTotal + bookPrice[j][0];
 								break;
 							case 2:
-								out.print("<td class='info'>二手书</td>");
+								out.print("<td class='info'><p>二手书</p></td>");
 								bookNumberTotal++;
 								bookPriceTotal = bookPriceTotal + bookPrice[j][1];
 								break;
 							case 3:
-								out.print("<td class='info'>复印书</td>");
+								out.print("<td class='info'><p>复印书</p></td>");
 								bookNumberTotal++;
 								bookPriceTotal = bookPriceTotal + bookPrice[j][2];
 								break;
@@ -171,17 +172,17 @@
 								out.print("<td></td>");
 						}
 					}
-					out.print("<td>" + bookNumberTotal + "</td>");
+					out.print("<td><p>" + bookNumberTotal + "</p></td>");
 					//四舍五入 取整
 //					out.print("<td>" + (int) (bookPriceTotal + 0.5f) + "</td>");
 					//四舍五入 到小数点2位
-					out.print("<td>" + (float) (Math.round(bookPriceTotal * 100)) / 100 + "</td>");
+					out.print("<td><p>" + (float) (Math.round(bookPriceTotal * 100)) / 100 + "</p></td>");
 
 					payStatus = rs.getInt("paystatus");
 					if (payStatus == 1) {
-						out.print("<td class='success'>已支付</td>");
+						out.print("<td class='success'><p>已支付</p></td>");
 					} else {
-						out.print("<td class='danger'>未支付</td>");
+						out.print("<td class='danger'><p>未支付</p></td>");
 					}
 				}
 			%>
