@@ -72,7 +72,7 @@
 				studentName = session.getAttribute("studentName");
 				db.createDataBaseConnection();
 				sql = "SELECT * FROM tb_order WHERE id = '" + studentId + "' AND name = '" + studentName + "';";
-				System.out.print(sql + "\n");
+				//System.out.print(sql + "\n");
 				rs = db.executeQuery(sql);
 				data = rs.getMetaData();
 				columnCount = data.getColumnCount();
@@ -112,7 +112,7 @@
 						out.print("<div class = \"col-lg-6 col-md-6 col-sm-6\" >");
 						out.print("<select class = 'form-control' name = '" + data.getColumnName(i) + "' >");
 
-						System.out.print("书对应号:" + rs.getInt(i) + "\n");
+//						System.out.print("书对应号:" + rs.getInt(i) + "\n");
 						switch (rs.getInt(i)) {
 							case 0:
 								out.print("<option selected value='0'>不订</option >");

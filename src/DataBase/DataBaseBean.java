@@ -81,7 +81,6 @@ public class DataBaseBean {
     public int executeUpdateMany(String sql, String[] bookCode) {
         try {
             stmt = conn.prepareStatement(sql);
-            System.out.print(sql + "\n");
             System.out.print(bookCode[0] + "\n");
             ((PreparedStatement) stmt).setString(1, bookCode[0]);
             ((PreparedStatement) stmt).setString(2, bookCode[1]);
@@ -92,7 +91,7 @@ public class DataBaseBean {
             ((PreparedStatement) stmt).setString(7, bookCode[6]);
             ((PreparedStatement) stmt).setString(8, bookCode[7]);
             System.out.print(sql + "\n");
-            isOK = ((PreparedStatement) stmt).executeUpdate();
+//            isOK = ((PreparedStatement) stmt).executeUpdate(sql);
 //            stmt = conn.createStatement();
 //            stmt.executeUpdate(sql);
 //            sql =sql;

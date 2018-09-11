@@ -13,8 +13,11 @@
 	Object studentName = session.getAttribute("studentName");
 
 	String sql;
+	Connection conn = null;
+	Statement stmt;
 	ResultSet rs;
 	ResultSetMetaData data;
+
 	int columnCount;
 	int usableColumnCount;
 	String columnName;
@@ -67,34 +70,58 @@
 		}
 	}
 
+//	System.out.print(firstBook);
+//	System.out.print(secondBook);
+//	System.out.print(thirdBook);
+//	System.out.print(fourthBook);
+//	System.out.print(fifthBook);
+//	System.out.print(sixthBook);
+//	System.out.print(seventhBook);
+//	System.out.print(eighthBook);
 
-	String bookCode[] = {firstBook, secondBook, thirdBook, fourthBook, fifthBook, sixthBook, seventhBook, eighthBook};
+	//String bookCode[] = {firstBook, secondBook, thirdBook, fourthBook, fifthBook, sixthBook, seventhBook, eighthBook};
 
-	sql = "UPDATE tb_user SET firstbook=?,secondbook=?,thirdbook=?,fourthbook=?,fifthbook=?,sixthbook=?,seventhbook=?,eighthbook=? " +
-			"WHERE id = '" + studentId + "';";
-	//firstbook     计算机网络
-	//secondbook    ERP原理、实施与管理
-	//thirdbook     移动开发技术与应用
-	//fourthbook    决策支持系统
-	//fifthbook     IT项目管理
-	//sixthbook     信息安全
-	//seventhbook   数据库应用系统设计
-	//eighthbook    数据处理技术与SPSS
-	db.executeUpdateMany(sql, bookCode);
+	db.closeDataBaseConnection();
 
-	System.out.print(firstBook);
-	System.out.print(secondBook);
-	System.out.print(thirdBook);
-	System.out.print(fourthBook);
-	System.out.print(fifthBook);
-	System.out.print(sixthBook);
-	System.out.print(seventhBook);
-	System.out.print(eighthBook);
+	String dbDriver = "com.mysql.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/";
+	String dbName = "db_orderbooks";
+	String dbUser = "root";
+	String dbPassword = "root";
 
-	//	获取 登录
-	String oneBook = request.getParameter("");
+	PreparedStatement batch_sql;
 
+	Class.forName(dbDriver);
+
+	conn = DriverManager.getConnection(url + dbName + "?user=" + dbUser
+			+ "&password=" + dbPassword + "&useUnicode=true&characterEncoding=utf-8");
+
+	//stmt = conn.createStatement();
+	batch_sql = conn.prepareStatement(
+			"update tb_order set firstbook=?,secondbook=?,thirdbook=?,fourthbook=?,fifthbook=?,sixthbook=?,seventhbook=?,eighthbook=? where id='"
+					+ studentId + "';");
+
+	batch_sql.setString(1,firstBook);
+	batch_sql.setString(2,secondBook);
+	batch_sql.setString(3,thirdBook);
+	batch_sql.setString(4,fourthBook);
+	batch_sql.setString(5,fifthBook);
+	batch_sql.setString(6,sixthBook);
+	batch_sql.setString(7,seventhBook);
+	batch_sql.setString(8,eighthBook);
+
+	//System.out.print(batch_sql);
+
+	// 定义 标识符
+	int isOK;
+
+	isOK = batch_sql.executeUpdate();
+
+	if(isOK!=0){
+		out.print("<script>alert('修改保存成功！')</script>");
+		response.setHeader("Refresh", "0;url=../pages/home.jsp");
+	}else {
+		out.print("<script>alert('抱歉，出了点问题！')</script>");
+		response.setHeader("Refresh", "0;url=../pages/order.jsp");
+	}
 %>
-
-
-
