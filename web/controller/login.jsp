@@ -84,18 +84,18 @@
 	}
 %>--%>
 
-<%--<%
+<%
 	//检查权限
 	try {
 		//建立连接
 		db.createDataBaseConnection();
 		//数据库操作
-		sql="SELECT permission FROM tb_user WHERE id=" + studentId;
+		sql="SELECT * FROM tb_user WHERE id='" + studentId+"';";
 		rs = db.executeQuery(sql);
 		//  判断是否拥有权限
 		while (rs.next()) {
-			String info = rs.getString("permission");
-			session.setAttribute("userInfo", info);
+			String canIEdit = rs.getString("permission");
+			session.setAttribute("canIEdit", canIEdit);
 		}
 		//关闭数据库连接
 		db.closeDataBaseConnection();
@@ -103,7 +103,7 @@
 		System.out.print("检查权限时发生错误！");
 		response.sendRedirect("../pages/login.html");return;
 	}
-%>--%>
+%>
 
 <%
 	//判断用户是否存在

@@ -156,6 +156,7 @@
 	</div >
 </div >
 
+<br >
 
 <%--引入 网站页脚--%>
 <%@ include file = "../common/footer.jsp" %>

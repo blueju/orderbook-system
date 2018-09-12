@@ -12,6 +12,7 @@
 <%
 	Object studentName = session.getAttribute("studentName");
 	Object studentId = session.getAttribute("studentId");
+	Object canIEdit = session.getAttribute("canIEdit");
 %>
 
 <%--CSS--%>
@@ -27,7 +28,7 @@
 				<span class = "icon-bar" ></span >
 				<span class = "icon-bar" ></span >
 			</button >
-			<a class = "navbar-brand" href = "#" ><strong>订书系统</strong></a >
+			<a class = "navbar-brand" href = "http://localhost:8080/OrderBook/pages/home.jsp" ><strong>订书系统</strong></a >
 		</div >
 		<%--导航栏--%>
 		<div class = "collapse navbar-collapse"  id="navbar-collapse">
@@ -35,7 +36,13 @@
 				<li ><a href = "../pages/home.jsp" >订书详情</a ></li >
 				<li ><a href = "../pages/order.jsp" >订书中心</a ></li >
 				<li ><a href = "../pages/pay.jsp" >支付中心</a ></li >
-				<li ><a href = "" data-toggle="modal" data-target="#myModal"><strong>通知</strong></a ></li >
+				<li ><a href = "" data-toggle="modal" data-target="#myModal">通知</a ></li >
+				<%
+					if(canIEdit.equals("管理员")){
+					    out.print("<li><a href='../pages/admin.jsp'>后台管理</a></li>");
+						out.print("<li><a href='../pages/statistics.jsp'>后台统计</a></li>");
+					}
+				%>
 			</ul >
 			<div class="navbar-right">
 				<p class="navbar-text"><span class="glyphicon glyphicon-user"></span> <%=studentId%> <%=studentName%></p>

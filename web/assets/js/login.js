@@ -8,7 +8,7 @@ $("#login").validate({
         //	学号必填
         studentId: {
             required: true,
-            max: 15251101262
+            // max: 15251101262
         },
         //	密码必填
         password: {
@@ -19,7 +19,7 @@ $("#login").validate({
     messages: {
         studentId: {
             required: "请输入学号11",
-            max: "输入值不能大于 15251101262"
+            // max: "输入值不能大于 15251101262"
         },
         password: {
             required: "请输入密码"
