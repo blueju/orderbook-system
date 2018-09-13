@@ -1,6 +1,10 @@
 <%@ page language = "java" import = "java.util.*, java.sql.ResultSetMetaData" pageEncoding = "utf-8" %>
 <%@ page contentType = "text/html; charset=utf-8" %>
 
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+
 <!DOCTYPE html>
 <html >
 <head >
@@ -36,7 +40,7 @@
 <body >
 
 <%--引入Javabean--%>
-<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
+<%--<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >--%>
 
 <%--引入网站页头 --%>
 <%@ include file = "../common/header.jsp" %>
@@ -59,8 +63,8 @@
 					<tbody >
 					<%
 						db.createDataBaseConnection();
-						String sql = "SELECT * FROM tb_book";
-						ResultSet rs = db.executeQuery(sql);
+						sql = "SELECT * FROM tb_book";
+						rs = db.executeQuery(sql);
 //							ResultSetMetaData data = rs.getMetaData();
 						while (rs.next()) {
 //							    String four =data.getColumnName(4);
@@ -81,12 +85,32 @@
 				<button class = "btn btn-primary" type = "submit" >提交修改</button >
 			</form >
 
+			<%
+				String allow_content;
+				String deny_content;
+
+				db.createDataBaseConnection();
+				sql = "SELECT jurisdiction FROM tb_jurisdiction WHERE name = 'all';";
+				rs = db.executeQuery(sql);
+				if (rs.next() == false) {
+
+				}
+				jurisdiction = rs.getInt("jurisdiction");
+				db.closeDataBaseConnection();
+			%>
 			<h2 >订书权限</h2 >
-			<form role = "form" >
+			<form role = "form" method = "post" action = "../controller/admin/jurisdiction_update.jsp" >
 				<div class = "form-group" >
-					<select class = "form-control" >
-						<option >允许订书操作</option >
-						<option >禁止订书操作</option >
+					<select class = "form-control" name="jurisdiction">
+						<%
+							if (jurisdiction == 1) {
+								out.print("<option value = \"1\" selected>允许订书操作</option >");
+								out.print("<option value = \"0\" >禁止订书操作</option >");
+							} else {
+								out.print("<option value = \"1\" >允许订书操作</option >");
+								out.print("<option value = \"0\" selected>禁止订书操作</option >");
+							}
+						%>
 					</select >
 				</div >
 				<div class = "form-group" >
@@ -96,18 +120,27 @@
 				</div >
 			</form >
 
+
+			<%
+				db.createDataBaseConnection();
+				String notice = null;
+				sql = "SELECT * FROM tb_notice;";
+				rs = db.executeQuery(sql);
+				if (rs.next()) {
+					notice = rs.getString("content");
+				}
+				db.closeDataBaseConnection();
+			%>
+
 			<h2 >通知</h2 >
-			<form role = "form" >
+			<form role = "form" method = "post" action = "../controller/admin/notice_update.jsp" >
 				<div class = "form-group" >
-					<textarea class = "form-control" rows = "3" ></textarea >
+					<textarea class = "form-control" rows = "4" name = "notice" ><%=notice%></textarea >
 				</div >
 				<div class = "form-group" >
-					<div class = "" >
-						<button type = "submit" class = "btn btn-primary" >发布通知</button >
-					</div >
+					<button type = "submit" class = "btn btn-primary" >发布通知</button >
 				</div >
 			</form >
-
 		</div >
 	</div >
 </div >

@@ -24,12 +24,12 @@
 			db.executeUpdate(sql);
 //			System.out.print("已改为→未支付状态");
 //			response.setHeader("Refresh", "0,../pages/statistics.jsp");
-			response.sendRedirect("../pages/statistics.jsp");
+			response.sendRedirect("../../pages/statistics.jsp");
 		} else {
 			sql = "UPDATE tb_order SET paystatus = 1 WHERE id = '" + result + "';";
 			db.executeUpdate(sql);
 //			System.out.print("已改为→已支付状态");
-			response.sendRedirect("../pages/statistics.jsp");
+			response.sendRedirect("../../pages/statistics.jsp");
 		}
 	}
 %>

@@ -10,7 +10,7 @@
 
 	if (result == null) {
 		out.print("<script>alert('未选中任何一项，请选中后重试！')</script>");
-		response.setHeader("refresh", "0,../pages/statistics.jsp");
+		response.setHeader("refresh", "0,../../pages/statistics.jsp");
 	} else {
 		db.createDataBaseConnection();
 		String sql;
@@ -22,14 +22,14 @@
 //				System.out.print(sql + "\n");
 			}
 			db.closeDataBaseConnection();
-			response.sendRedirect("../pages/statistics.jsp");
+			response.sendRedirect("../../pages/statistics.jsp");
 		} else {
 			for (int i = 0; i < result.length; i++) {
 				sql = "UPDATE tb_order SET paystatus= 0 WHERE id='" + result[i] + "';";
 				db.executeUpdate(sql);
 			}
 			db.closeDataBaseConnection();
-			response.sendRedirect("../pages/statistics.jsp");
+			response.sendRedirect("../../pages/statistics.jsp");
 		}
 	}
 %>

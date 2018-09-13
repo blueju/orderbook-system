@@ -35,7 +35,7 @@
 </head >
 <body >
 <%--引入Javabean--%>
-<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
+<%--<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >--%>
 
 
 <div class = "container-fluid pay" >

@@ -43,7 +43,7 @@
 <body >
 
 <%--引入Javabean--%>
-<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
+<%--<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >--%>
 
 <%--引入网站页头 --%>
 <%@ include file = "../common/header.jsp" %>
@@ -51,8 +51,6 @@
 <%--全局定义--%>
 <%
 	int columnCount = 0;
-	String sql;
-	ResultSet rs;
 	String columnName;
 	int howManyTypeBook = 0;
 	float bookPrice[][];

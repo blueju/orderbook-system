@@ -36,7 +36,7 @@
 <body >
 
 <%--引入Javabean--%>
-<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
+<%--<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >--%>
 
 <%--引入网站页头 --%>
 <%@ include file = "../common/header.jsp" %>
@@ -80,8 +80,8 @@
 									break;
 							}
 							for (int j = 0; j <= 7; j++) {
-								String sql = "SELECT count(*) FROM tb_order WHERE " + book[j] + " = " + i;
-								ResultSet rs = db.executeQuery(sql);
+							    sql = "SELECT count(*) FROM tb_order WHERE " + book[j] + " = " + i;
+							    rs = db.executeQuery(sql);
 								if (rs.next()) {
 									out.print("<td>" + rs.getString(1) + "</td>");
 								}
@@ -94,13 +94,15 @@
 			</form >
 
 			<h2 >支付状态</h2 >
-			<button class = "btn btn-success" type = "submit" name = "type" value = "already" formmethod = "post" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 已支付
+			<button class = "btn btn-success" type = "submit" name = "type" value = "already" formmethod = "post" form = "paystatus" formaction = "../controller/statistics/batch_update_paystatus.jsp" >
+				批量 已支付
 			</button >
-			<button class = "btn btn-warning" type = "submit" name = "type" value = "never" formmethod = "post" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 未支付
+			<button class = "btn btn-warning" type = "submit" name = "type" value = "never" formmethod = "post" form = "paystatus" formaction = "../controller/statistics/batch_update_paystatus.jsp" >
+				批量 未支付
 			</button >
 			<br >
 			<br >
-			<form role = "form" action = "../controller/update_paystatus.jsp" id = "paystatus" >
+			<form role = "form" action = "../controller/statistics/update_paystatus.jsp" id = "paystatus" >
 				<table class = "table table-bordered" >
 					<thead >
 					<tr >
@@ -115,8 +117,8 @@
 					<%--<input type = "checkbox" >--%>
 					<%
 						db.createDataBaseConnection();
-						String sql = "SELECT id,name,paystatus FROM tb_order";
-						ResultSet rs = db.executeQuery(sql);
+						sql = "SELECT id,name,paystatus FROM tb_order";
+						rs = db.executeQuery(sql);
 						while (rs.next()) {
 							out.print("<tr >");
 							out.print("<td><input type='checkbox' name='batch_update_paystatus' value='" + rs.getString("id") + "'/></td>");
@@ -136,9 +138,13 @@
 					%>
 					</tbody >
 				</table >
-				<button class = "btn btn-success" type = "submit" name = "type" value = "already" formmethod = "post" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 已支付
+				<button class = "btn btn-success" type = "submit" name = "type" value = "already" formmethod = "post" form = "paystatus"
+				        formaction = "../controller/statistics/batch_update_paystatus.jsp" >
+					批量 已支付
 				</button >
-				<button class = "btn btn-warning" type = "submit" name = "type" value = "never" formmethod = "post" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 未支付
+				<button class = "btn btn-warning" type = "submit" name = "type" value = "never" formmethod = "post" form = "paystatus"
+				        formaction = "../controller/statistics/batch_update_paystatus.jsp" >
+					批量 未支付
 				</button >
 			</form >
 		</div >
