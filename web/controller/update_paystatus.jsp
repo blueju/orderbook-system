@@ -20,7 +20,7 @@
 		int old_paystatus = rs.getInt("paystatus");
 		if (old_paystatus == 1) {
 			sql = "UPDATE tb_order SET paystatus = 0 WHERE id = '" + result + "';";
-			System.out.print(sql);
+//			System.out.print(sql);
 			db.executeUpdate(sql);
 //			System.out.print("已改为→未支付状态");
 //			response.setHeader("Refresh", "0,../pages/statistics.jsp");

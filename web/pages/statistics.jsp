@@ -94,8 +94,10 @@
 			</form >
 
 			<h2 >支付状态</h2 >
-			<button class = "btn btn-success" type = "submit" name = "type" value = "already" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 已支付</button >
-			<button class = "btn btn-warning" type = "submit" name = "type" value = "never" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 未支付</button >
+			<button class = "btn btn-success" type = "submit" name = "type" value = "already" formmethod = "post" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 已支付
+			</button >
+			<button class = "btn btn-warning" type = "submit" name = "type" value = "never" formmethod = "post" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 未支付
+			</button >
 			<br >
 			<br >
 			<form role = "form" action = "../controller/update_paystatus.jsp" id = "paystatus" >
@@ -134,8 +136,10 @@
 					%>
 					</tbody >
 				</table >
-				<input class = "btn btn-success" type = "submit" name = "already" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" value = "批量 已支付" >
-				<input class = "btn btn-warning" type = "submit" name = "never" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" value = "批量 未支付" >
+				<button class = "btn btn-success" type = "submit" name = "type" value = "already" formmethod = "post" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 已支付
+				</button >
+				<button class = "btn btn-warning" type = "submit" name = "type" value = "never" formmethod = "post" form = "paystatus" formaction = "../controller/batch_update_paystatus.jsp" >批量 未支付
+				</button >
 			</form >
 		</div >
 	</div >

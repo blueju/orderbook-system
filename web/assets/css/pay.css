@@ -1,0 +1,19 @@
+.pay figure {
+    display: block;
+    text-align: center;
+}
+
+.pay figure figcaption {
+    text-align: center;
+    font-size: 30px;
+}
+
+.pay figure img {
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .pay>div>div:nth-child(2){
+        margin-left: 8.333333%;
+    }
+}

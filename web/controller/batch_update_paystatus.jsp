@@ -9,17 +9,17 @@
 //	System.out.print(result.length + "\n");
 
 	if (result == null) {
-		out.print("未选中任何一项，请选中后重试！");
+		out.print("<script>alert('未选中任何一项，请选中后重试！')</script>");
 		response.setHeader("refresh", "0,../pages/statistics.jsp");
 	} else {
 		db.createDataBaseConnection();
 		String sql;
 		if (type.equals("already")) {
 			for (int i = 0; i < result.length; i++) {
-				System.out.print(result[0] + "\n");
+//				System.out.print(result[0] + "\n");
 				sql = "UPDATE tb_order SET paystatus = 1 WHERE id ='" + result[i] + "';";
 				db.executeUpdate(sql);
-				System.out.print(sql + "\n");
+//				System.out.print(sql + "\n");
 			}
 			db.closeDataBaseConnection();
 			response.sendRedirect("../pages/statistics.jsp");

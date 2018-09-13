@@ -182,7 +182,7 @@
 					if (payStatus == 1) {
 						out.print("<td class='success'><p>已支付</p></td>");
 					} else {
-						out.print("<td class='danger'><p>未支付</p></td>");
+						out.print("<td class='danger'><p>未支付&emsp;<a href='pay.jsp'>→</a></p></td>");
 					}
 				}
 			%>

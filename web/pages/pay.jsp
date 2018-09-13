@@ -1,5 +1,5 @@
 <%@ page language = "java" import = "java.util.*" pageEncoding = "utf-8" %>
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType = "text/html; charset=utf-8" %>
 
 <!DOCTYPE html>
 <html >
@@ -31,30 +31,34 @@
 	<link rel = "stylesheet" href = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.css" >
 	<%--自定义CSS--%>
 	<link rel = "stylesheet" href = "../assets/css/common.css" >
+	<link rel = "stylesheet" href = "../assets/css/pay.css" >
 </head >
 <body >
 <%--引入Javabean--%>
 <jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
 
+
+<div class = "container-fluid pay" >
+	<div class = "row" >
+		<div class = "col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1" >
+			<figure >
+				<figcaption >支付宝</figcaption >
+				<img src = "../assets/img/Alipay.png" class = "img-thumbnail" alt = "支付宝" width = "300px" >
+			</figure >
+		</div >
+		<div class = "col-lg-3 col-md-3 col-sm-5 col-xs-10" >
+			<figure >
+				<figcaption >微信</figcaption >
+				<img src = "../assets/img/WeChatPay.png" class = "img-thumbnail" alt = "微信" width = "300px" >
+			</figure >
+		</div >
+	</div >
+</div >
+
+<br >
+
 <%--引入网站页头 --%>
 <%@ include file = "../common/header.jsp" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <%--引入 网站页脚--%>
