@@ -112,10 +112,10 @@
 		session.setAttribute("studentName", name);
 		//学号加入session
 		session.setAttribute("studentId", studentId);
-		//前往主页
-		response.setHeader("Refresh", "0;url=../pages/home.jsp");
+		//成功，先前往登录日志记录页，而后再前往主页
+		response.setHeader("Refresh", "0;url=login-log.jsp");
 	} else {
-		//前往 登录页
+		//失败，回到登录页
 		out.println("<script>alert('学号或密码错误，请重新登录！')</script>");
 		response.setHeader("Refresh", "0;url=../pages/login.html");
 	}
