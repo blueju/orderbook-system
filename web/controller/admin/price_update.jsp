@@ -14,9 +14,6 @@
 	try {
 		while (rs.next()) {
 				String price[] = request.getParameterValues("price" + rs.getString("id"));
-				System.out.print(price[0] + "\n");
-				System.out.print(price[1] + "\n");
-				System.out.print(price[2] + "\n");
 				sql = "UPDATE tb_book SET one_price = '" + price[0] + "',two_price='" + price[1] + "',three_price='" + price[2] + "' WHERE id = '" + rs.getString("id") + "';";
 				db.executeUpdate(sql);
 		}

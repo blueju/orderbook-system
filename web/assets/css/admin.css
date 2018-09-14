@@ -1,0 +1,68 @@
+@media (max-width: 767px) {
+    .price_update{
+        border:none;
+    }
+
+    .price_update thead{
+        display: none;
+    }
+
+    .price_update tr,td{
+        display: block;
+    }
+
+    .price_update tr{
+        margin-bottom: 1em;
+        box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .price_update td{
+        position: relative;
+    }
+
+    .price_update td p{
+        margin-bottom: 0;
+        padding-left: 20%;
+    }
+
+    .price_update td input{
+        margin-left: 20%;
+        width: 80%;
+    }
+    .book_name{
+        background-color: #5bc0de;
+    }
+
+    .book_name:before{
+        content: "课本名称";
+        position: absolute;
+        font-weight: bold;
+    }
+    .course_name:before{
+        content: "课程名";
+        position: absolute;
+        font-weight: bold;
+        left: 16px;
+    }
+    .first_book:before{
+        content: "正版书";
+        position: absolute;
+        font-weight: bold;
+        line-height: 34px;
+        left: 16px;
+    }
+    .second_book:before{
+        content: "二手书";
+        position: absolute;
+        font-weight: bold;
+        line-height: 34px;
+        left: 16px;
+    }
+    .third_book:before{
+        content: "复印书";
+        position: absolute;
+        font-weight: bold;
+        line-height: 34px;
+        left: 16px;
+    }
+}

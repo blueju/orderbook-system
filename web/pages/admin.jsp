@@ -45,12 +45,13 @@
 <%--引入网站页头 --%>
 <%@ include file = "../common/header.jsp" %>
 
+
 <div class = "container-fluid manage" >
 	<div class = "row" >
 		<div class = "col-lg-8 col-lg-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-sm-offset-2" >
 			<h2 >价格录入</h2 >
-			<form action = "../controller/admin/price_update.jsp" method = "post" >
-				<table class = "table table-bordered" >
+			<form action = "../controller/admin/price_update.jsp" method = "post"  >
+				<table class = "table table-bordered price_update" >
 					<thead >
 					<tr >
 						<th >课本名称</th >
@@ -67,11 +68,11 @@
 						rs = db.executeQuery(sql);
 						while (rs.next()) {
 							out.print("<tr>");
-							out.print("<td>" + rs.getString(2) + "</td>");
-							out.print("<td>" + rs.getString(3) + "</td>");
-							out.print("<td><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(4) + "'></td>");
-							out.print("<td><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(5) + "'></td>");
-							out.print("<td><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(6) + "'></td>");
+							out.print("<td class = 'book_name'><p>" + rs.getString(2) + "</p></td>");
+							out.print("<td class = 'course_name'><p>" + rs.getString(3) + "</p></td>");
+							out.print("<td class = 'first_book'><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(4) + "'></td>");
+							out.print("<td class = 'second_book'><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(5) + "'></td>");
+							out.print("<td class = 'third_book'><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(6) + "'></td>");
 							out.print("</tr>");
 						}
 						db.closeDataBaseConnection();

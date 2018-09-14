@@ -46,7 +46,7 @@
 		<div class = "col-lg-8 col-lg-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-sm-offset-2" >
 			<h2 >订书统计</h2 >
 			<form action = "" method = "post" >
-				<table class = "table table-bordered" >
+				<table class = "table table-bordered order-statistic">
 					<thead >
 					<tr >
 						<th >课本类型</th >
@@ -103,7 +103,7 @@
 			<br >
 			<br >
 			<form role = "form" action = "../controller/statistics/update_paystatus.jsp" id = "paystatus" >
-				<table class = "table table-bordered" >
+				<table class = "table table-bordered statistic-pay-status-table" >
 					<thead >
 					<tr >
 						<th class = "text-center" ></th >

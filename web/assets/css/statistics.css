@@ -1,0 +1,119 @@
+@media (max-width: 767px) {
+    .order-statistic{
+        border: none;
+    }
+
+    .order-statistic thead{
+        display: none;
+    }
+
+    .order-statistic tbody tr,.order-statistic tbody td{
+        display: block;
+    }
+
+    .order-statistic tbody tr{
+        margin-bottom: 1em;
+        box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
+        position: relative;
+    }
+
+    .order-statistic tbody tr td{
+        text-align: center;
+        padding-left: 30%;
+    }
+
+    .order-statistic tbody tr td:nth-child(1){
+        background-color:#c4e3f3 ;
+    }
+    .order-statistic tbody tr td:nth-child(1):before{
+        content: "课本类型";
+        position: absolute;
+        left: 1em;
+        font-weight: bold;
+    }
+    .order-statistic tbody tr td:nth-child(2):before{
+        content: "计算机网络";
+        position: absolute;
+        left: 1em;
+    }
+    .order-statistic tbody tr td:nth-child(3):before{
+        content: "ERP原理、实施与管理";
+        position: absolute;
+        left: 1em;
+    }
+    .order-statistic tbody tr td:nth-child(4):before{
+        content: "移动开发技术与应用";
+        position: absolute;
+        left: 1em;
+    }
+    .order-statistic tbody tr td:nth-child(5):before{
+        content: "决策支持系统";
+        position: absolute;
+        left: 1em;
+    }
+    .order-statistic tbody tr td:nth-child(6):before{
+        content: "IT项目管理";
+        position: absolute;
+        left: 1em;
+    }
+    .order-statistic tbody tr td:nth-child(7):before{
+        content: "信息安全";
+        position: absolute;
+        left: 1em;
+    }
+    .order-statistic tbody tr td:nth-child(8):before{
+        content: "数据库应用系统设计";
+        position: absolute;
+        left: 1em;
+    }
+    .order-statistic tbody tr td:nth-child(9):before{
+        content: "数据处理技术与SPSS";
+        position: absolute;
+        left: 1em;
+    }
+}
+
+@media (max-width: 767px) {
+    .statistic-pay-status-table{
+        border: none;
+    }
+    .statistic-pay-status-table thead{
+        display: none;
+    }
+    .statistic-pay-status-table tbody tr,
+    .statistic-pay-status-table tbody td{
+        display: block;
+    }
+
+    .statistic-pay-status-table tbody tr{
+        margin-bottom: 1em;
+        box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .statistic-pay-status-table tbody td{
+        position: relative;
+    }
+
+    .statistic-pay-status-table tbody tr td:nth-child(2):before{
+        content: "学号";
+        position: absolute;
+        left: 1em;
+    }
+    .statistic-pay-status-table tbody tr td:nth-child(3):before{
+        content: "姓名";
+        position: absolute;
+        left: 1em;
+    }
+    .statistic-pay-status-table tbody tr td:nth-child(4):before{
+        content: "支付状态";
+        position: absolute;
+        left: 1em;
+    }
+    .statistic-pay-status-table tbody tr td:nth-child(5):before{
+        content: "操作（切换状态）";
+        position: absolute;
+        left: 1em;
+        top: 1em;
+        vertical-align: middle;
+    }
+}
