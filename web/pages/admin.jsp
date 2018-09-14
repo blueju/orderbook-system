@@ -49,7 +49,7 @@
 	<div class = "row" >
 		<div class = "col-lg-8 col-lg-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-sm-offset-2" >
 			<h2 >价格录入</h2 >
-			<form action = "" method = "post" >
+			<form action = "../controller/admin/price_update.jsp" method = "post" >
 				<table class = "table table-bordered" >
 					<thead >
 					<tr >
@@ -65,17 +65,13 @@
 						db.createDataBaseConnection();
 						sql = "SELECT * FROM tb_book";
 						rs = db.executeQuery(sql);
-//							ResultSetMetaData data = rs.getMetaData();
 						while (rs.next()) {
-//							    String four =data.getColumnName(4);
-//								String five =data.getColumnName(5);
-//								String six =data.getColumnName(6);
 							out.print("<tr>");
 							out.print("<td>" + rs.getString(2) + "</td>");
 							out.print("<td>" + rs.getString(3) + "</td>");
-							out.print("<td><input type = 'text' class = 'form-control' value='" + rs.getString(4) + "'></td>");
-							out.print("<td><input type = 'text' class = 'form-control' value='" + rs.getString(5) + "'></td>");
-							out.print("<td><input type = 'text' class = 'form-control' value='" + rs.getString(6) + "'></td>");
+							out.print("<td><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(4) + "'></td>");
+							out.print("<td><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(5) + "'></td>");
+							out.print("<td><input type = 'text' class = 'form-control' name='price"+rs.getString(1)+"' value='" + rs.getString(6) + "'></td>");
 							out.print("</tr>");
 						}
 						db.closeDataBaseConnection();

@@ -3,6 +3,7 @@
 <%
 	session.removeAttribute("studentId");
 	session.removeAttribute("studentName");
+	session.removeAttribute("first");
 	session.invalidate();
 	response.sendRedirect("../pages/login.html");
 %>

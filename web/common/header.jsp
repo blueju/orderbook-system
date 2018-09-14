@@ -25,10 +25,9 @@
 	if (session.getAttribute("first") == null) {
 		first = true;
 	} else {
-//	    String first = session.getAttribute("first").toString();
 		first = (boolean) session.getAttribute("first");
 	}
-	System.out.print(first + "\n");
+//	System.out.print(first + "\n");
 
 	int jurisdiction = 0;
 	String sql;
