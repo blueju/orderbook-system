@@ -22,7 +22,7 @@
 <%!
 	public static String getBrowser(String userAgent) {
 		if (userAgent == null || userAgent.trim().length() < 1) {
-			return "unknow ";
+			return "Unknown";
 		}
 		String[] brorserEN = new String[]{
 				"rv:11.0",//IE 11.0
@@ -33,10 +33,10 @@
 		};
 		String[] brorserCN = new String[]{
 				"IE 11.0",
-				"Firefox 火狐浏览器",
-				"Safari 苹果手机浏览器",
-				"Android 安卓浏览器",
-				"Chrome 谷歌浏览器",
+				"Firefox",
+				"iPhone",
+				"Android",
+				"Chrome",
 		};
 		for (int i = 0; i < brorserEN.length; i++) {
 			if (userAgent.indexOf(brorserEN[i]) > -1) {
@@ -57,7 +57,7 @@
 			}
 			return "IE";
 		}
-		return "未知浏览器";
+		return "Other Browser";
 	}
 %>
 
