@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" name="" id="password" value="root" />
+		<button onclick="one()">按钮</button>
+		<script src="md5.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function one(){
+				var password = document.getElementById("password").value;
+				var md5_password = hex_md5(password);
+				alert(md5_password);
+				console.log(md5_password);
+			}
+		</script>
+	</body>
+</html>

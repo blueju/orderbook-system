@@ -1,4 +1,4 @@
-<%@ page language = "java" import = "java.sql.*" pageEncoding = "UTF-8" %>
+<%@ page language = "java" import = "java.sql.*, java.util.Base64" pageEncoding = "UTF-8" %>
 
 <%--负责 获取页面传来的值 和 预处理操作--%>
 <%
@@ -23,10 +23,13 @@
 	String deadline = null;
 	//  姓名
 	String name = null;
+	//  密码
+	String database_password = null;
 %>
 
 <%--引入Javabean--%>
 <jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
+<jsp:useBean id = "md5" class = "MD5.MD5" scope = "page" ></jsp:useBean >
 
 
 <%
@@ -35,20 +38,26 @@
 		// 建立连接
 		db.createDataBaseConnection();
 		// 数据库操作（验证学号、密码）
-		sql = "SELECT * FROM tb_user WHERE id = '" + studentId + "' and password = '" + studentPassword + "';";
+//		sql = "SELECT * FROM tb_user WHERE id = '" + studentId + "' and password = '" + studentPassword + "';";
+		sql = "SELECT * FROM tb_user WHERE id = '" + studentId + "';";
 		rs = db.executeQuery(sql);
 		//  判断是否存在，如果存在标识符isExist为true
 		if (rs.next()) {
-			//标识符isExist为true
-			isExist = true;
-			//获取姓名
-			name = rs.getString("name");
+			database_password = rs.getString("password");
+			String md5_studentPassword = md5.MD5(studentPassword);
+			System.out.print(md5_studentPassword);
+			if (md5_studentPassword.equals(database_password)) {
+				isExist = true;
+				//获取姓名
+				name = rs.getString("name");
+			}
 		}
 		//关闭连接
 		db.closeDataBaseConnection();
-	}catch (Exception e){
+	} catch (Exception e) {
 		System.out.print("登录验证时发生错误！");
-		response.sendRedirect("../pages/login.html");return;
+		response.sendRedirect("../pages/login.html");
+		return;
 	}
 %>
 
@@ -90,7 +99,7 @@
 		//建立连接
 		db.createDataBaseConnection();
 		//数据库操作
-		sql="SELECT * FROM tb_user WHERE id='" + studentId+"';";
+		sql = "SELECT * FROM tb_user WHERE id='" + studentId + "';";
 		rs = db.executeQuery(sql);
 		//  判断是否拥有权限
 		while (rs.next()) {
@@ -101,7 +110,8 @@
 		db.closeDataBaseConnection();
 	} catch (Exception e) {
 		System.out.print("检查权限时发生错误！");
-		response.sendRedirect("../pages/login.html");return;
+		response.sendRedirect("../pages/login.html");
+		return;
 	}
 %>
 

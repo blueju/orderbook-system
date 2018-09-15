@@ -29,7 +29,11 @@ $("#login").validate({
 
 $.validator.setDefaults({
     submitHandler: function () {
-        // alert("提交事件!");
-        form.submit();
+        var password = $("#password").val();
+        if (password.trim().length < 32) {
+            password = hex_md5(password);
+            $("#password").val(password);
+            form.submit();
+        }
     }
 });
