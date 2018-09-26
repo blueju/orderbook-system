@@ -11,7 +11,7 @@ public class DataBaseBean {
     // 定义 URL
     private String url = "jdbc:mysql://localhost:3306/";
     // 定义 数据库名称
-    private String dbName = "db_orderbooks";
+    private String dbName = "db_orderbook";
     // 定义 数据库登录用户名
     private String dbUser = "root";
     // 定义 数据库登录密码
