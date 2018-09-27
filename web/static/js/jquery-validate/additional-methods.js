@@ -1342,6 +1342,7 @@
         return this.optional(element) || /^90[2-5]\d\{2\}-\d{4}$/.test(value);
     }, "Your ZIP-code must be in the range 902xx-xxxx to 905xx-xxxx");
 
+    //  自定义的方法，用于检测学号是否正确，正确项有[root,14251101208,15251101201-15251101261]
     $.validator.addMethod("checkStudentId", function (value, element, param) {
         var studentIdLength = value.length;
         var how;
