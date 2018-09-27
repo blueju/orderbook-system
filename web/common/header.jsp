@@ -80,14 +80,26 @@
 				%>
 			</ul >
 			<div class = "navbar-right" >
-				<p class = "navbar-text" ><span class = "glyphicon glyphicon-user" ></span > <%=studentId%> <%=studentName%>
+				<p class = "navbar-text" >
+					<span class = "glyphicon glyphicon-user" ></span >
+					<%=studentId%> <%=studentName%>
 				</p >
-				<p class = "navbar-text" ><a href = "../controller/logout.jsp" ><span class = "glyphicon glyphicon-log-in" ></span > 注销 </a ></p >
+				<p class = "navbar-text" >
+					<span class = "glyphicon glyphicon-lock" ></span >
+					<a href = "" data-toggle = "modal" data-target = "#alterPassword">
+						修改密码
+					</a >
+				</p >
+				<p class = "navbar-text" >
+					<a href = "../controller/logout.jsp" >
+						<span class = "glyphicon glyphicon-log-in" ></span > 注销
+					</a >
+				</p >
 			</div >
 		</div >
 	</div >
 </nav >
 
-
 <%--引入通知弹窗 --%>
 <%@ include file = "modal/notice.jsp" %>
+<%@ include file = "modal/alterPassword.html" %>

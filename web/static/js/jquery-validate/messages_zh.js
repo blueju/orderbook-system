@@ -29,7 +29,8 @@ $.extend( $.validator.messages, {
 	rangelength: $.validator.format( "请输入长度在 {0} 到 {1} 之间的字符串" ),
 	range: $.validator.format( "请输入范围在 {0} 到 {1} 之间的数值" ),
 	max: $.validator.format( "请输入不大于 {0} 的数值" ),
-	min: $.validator.format( "请输入不小于 {0} 的数值" )
+	min: $.validator.format( "请输入不小于 {0} 的数值" ),
+    checkStudentId: "学号非法"
 } );
 return $;
 }));

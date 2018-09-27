@@ -46,10 +46,10 @@
 		if (rs.next()) {
 			database_password = rs.getString("password");
 			String md5_studentPassword = md5.MD5(studentPassword);
-			System.out.print("输入的密码：root/152511012xx");
-			System.out.print("\n前端MD5加密后密码：" + studentPassword);
-			System.out.print("\n后端MD5加密后密码：" + md5_studentPassword);
-			System.out.print("\n数据库里的密码：" + database_password);
+//			System.out.print("输入的密码：root/152511012xx");
+//			System.out.print("\n前端MD5加密后密码：" + studentPassword);
+//			System.out.print("\n后端MD5加密后密码：" + md5_studentPassword);
+//			System.out.print("\n数据库里的密码：" + database_password);
 			if (md5_studentPassword.equals(database_password)) {
 				isExist = true;
 				//获取姓名

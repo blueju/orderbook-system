@@ -2,7 +2,7 @@
 <%@ page contentType = "text/html; charset=utf-8" %>
 
 <%!
-	private DataBaseBean db;
+//	private DataBaseBean db;
 %>
 <%
 	String notice_sql;
