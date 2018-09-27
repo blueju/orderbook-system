@@ -26,6 +26,14 @@
 	      content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" >
 	<!--标题-->
 	<title >订书系统→后台统计</title >
+	<!--JavaScript-->
+	<!--外部 JavaScript-->
+	<%--全局--%>
+	<script src = "https://lib.baomitu.com/jquery/3.3.1/jquery.js" ></script >
+	<script src = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.js" ></script >
+	<script src = "../static/js/jquery-validate/jquery.validate.js" ></script >
+	<script src = "../static/js/jquery-validate/additional-methods.js" ></script >
+	<script src = "../static/js/jquery-validate/messages_zh.js"></script >
 	<!--CSS-->
 	<%--外部CSS--%>
 	<link rel = "stylesheet" href = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.css" >
@@ -156,11 +164,6 @@
 <%--引入 网站页脚--%>
 <%@ include file = "../common/footer.jsp" %>
 
-<!--JavaScript-->
-<!--外部 JavaScript-->
-<%--全局--%>
-<script src = "https://lib.baomitu.com/jquery/3.3.1/jquery.js" ></script >
-<script src = "https://lib.baomitu.com/twitter-bootstrap/3.3.7/js/bootstrap.js" ></script >
 
 <!--自定义 JavaScript-->
 

@@ -62,7 +62,7 @@
 				<%
 					if (jurisdiction == 1) {
 						out.print("<li ><a href = '../pages/order.jsp' >订书中心</a ></li >");
-					} else if (canIEdit.equals("管理员")) {
+					} else if (canIEdit.equals("1")) {
 
 					} else if (first) {
 						out.print("<script>alert('已停止订书！');</script>");
@@ -73,7 +73,7 @@
 				<li ><a href = "../pages/pay.jsp" >支付</a ></li >
 				<li ><a href = "" data-toggle = "modal" data-target = "#myModal" >通知</a ></li >
 				<%
-					if (canIEdit.equals("管理员")) {
+					if (canIEdit.equals("1")) {
 						out.print("<li><a href='../pages/admin.jsp'>后台管理</a></li>");
 						out.print("<li><a href='../pages/statistics.jsp'>后台统计</a></li>");
 					}

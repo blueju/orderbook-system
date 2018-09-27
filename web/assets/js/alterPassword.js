@@ -19,37 +19,14 @@ $().ready(function () {
         // 规则
         rules: {
             //	学号必填
-            // oldPassword: {
-            //     required: true,
-            //     rangelength: [4, 10],
-            //     remote: {
-            //         type: "post",
-            //         url: "http://localhost:8080/OrderBook/web/controller/checkOldPasswordBeforeSubmit.jsp",
-            //         data: {
-            //             oldPassword: function () {
-            //                 var beforeMD5_password = $("#oldPassword").val();
-            //                 if (beforeMD5_password.trim().length < 32) {
-            //                     var afterMD5_password = hex_md5(beforeMD5_password);
-            //                     $("#oldPassword").val(afterMD5_password);
-            //                 }
-            //                 return $("#oldPassword").val();
-            //             }
-            //         },
-            //         dataType: "html",
-            //         dataFilter: function (data, type) {
-            //             if (data == "true") {
-            //                 return true
-            //             } else {
-            //                 return false
-            //             }
-            //         }
-            //     }
-            // },
+            oldPassword: {
+                required: true,
+                rangelength: [4, 10]
+            },
             //	密码必填
             newPassword: {
                 required: true,
-                rangelength:
-                    [4, 10]
+                rangelength: [4, 10]
             }
             ,
             //	确认密码必填
