@@ -8,8 +8,6 @@
 	Object studentId = session.getAttribute("studentId");
 	//	获取 获取旧密码
 	String oldPassword = request.getParameter("oldPassword");
-	//	获取 获取新密码
-	String newPassword = request.getParameter("newPassword");
 	//  字符串 SQL语句 入参 实参
 	String sql;
 	//  结果集 用于装javabean传出的结果集
@@ -20,6 +18,10 @@
 	String afterMD5_password_frontend;
 	//  将上面的密码再次MD5加密
 	String afterMD5_password_backend;
+	//  数据库里的密码
+	String passwordFromDatabase = null;
+	//  标识
+	//  String how;
 %>
 
 <%--引入Javabean--%>
@@ -32,17 +34,23 @@
 	try {
 		// 建立连接
 		db.createDataBaseConnection();
-		afterMD5_password_frontend = newPassword;
+		afterMD5_password_frontend = oldPassword;
 		afterMD5_password_backend = md5.MD5(afterMD5_password_frontend);
 
-		sql = "UPDATE tb_user SET password = '" + afterMD5_password_backend + "' WHERE id = '" + studentId + "';";
-		System.out.print(sql);
-		db.executeUpdate(sql);
-		System.out.print("成功");
+		sql = "SELECT * FROM tb_user WHERE id = '" + studentId + "';";
+		rs = db.executeQuery(sql);
+		if (rs.next()) {
+			passwordFromDatabase = rs.getString("password");
+			if (passwordFromDatabase.equals(afterMD5_password_backend)) {
+				// 相同
+return ;
+			} else {
+				// 不同
+
+			}
+		}
 		//关闭连接
 		db.closeDataBaseConnection();
-		response.sendRedirect("../pages/home.jsp");
-		return;
 	} catch (Exception e) {
 		System.out.print("修改密码时发生错误！");
 		response.sendRedirect("../pages/home.jsp");
