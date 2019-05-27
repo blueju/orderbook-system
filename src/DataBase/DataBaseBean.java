@@ -16,7 +16,6 @@ public class DataBaseBean {
     private String dbUser = "root";
     // 定义 数据库登录密码
     private String dbPassword = "root";
-
     //  定义 数据库连接
     private Connection conn;
     //  定义 ？？（类似中转对象，其中可能包含了具体如何查询数据库信息）
@@ -29,12 +28,14 @@ public class DataBaseBean {
     public Connection createDataBaseConnection() {
         try {
             //  加载数据库驱动
+            System.out.print("\n准备加载驱动！");
             Class.forName(dbDriver);
             //  启动连接
-            conn = DriverManager.getConnection(url + dbName + "?user=" + dbUser
-                    + "&password=" + dbPassword + "&useUnicode=true&characterEncoding=utf-8");
+              conn = DriverManager.getConnection(url + dbName + "?user=" + dbUser + "&password=" + dbPassword + "&useUnicode=true&characterEncoding=utf-8");
+//            conn = DriverManager.getConnection(url, dbUser, dbPassword);
         } catch (Exception e) {
-            System.out.print("建立数据库连接出错！");
+            System.out.print(e);
+            System.out.print("\n建立数据库连接出错！");
         }
         return conn;
     }

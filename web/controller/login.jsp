@@ -28,7 +28,6 @@
 %>
 
 <%--引入Javabean--%>
-<%--<jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >--%>
 <jsp:useBean id = "db" class = "DataBase.DataBaseBean" scope = "page" ></jsp:useBean >
 <jsp:useBean id = "md5" class = "MD5.MD5" scope = "page" ></jsp:useBean >
 
